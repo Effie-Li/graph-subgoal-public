@@ -1,0 +1,32 @@
+---
+dataset:
+  name: 'human30'
+  fname: 'data/graphs/graph=human30-path=shortest-step=multi.pkl'
+  n_graph: 30
+  n_isomorph: 20
+  n_node: 8
+  max_pathlen: 6
+  batch_size: 128
+  split_params:
+    mode: 'random'
+    train_prop: 0.75
+model:
+  graph_input: 'graph_embed' # 'graph_embed' or 'edge_token'
+  lr: 0.0003
+  architecture: 'a.f.a.f'
+  n_heads: 2
+  embed_dim: 32
+  mlp_dim: 32
+wandb:
+  project: 'graph-subgoal-v4'
+  save_dir: 'checkpoints/'
+checkpoint:
+  monitor: 'val/acc'
+  mode: 'max'
+  save_top_k: -1
+  save_last: True
+  every_n_epochs: 1
+trainer:
+  log_every_n_steps: 1
+  val_check_interval: 1
+  max_epochs: 30
